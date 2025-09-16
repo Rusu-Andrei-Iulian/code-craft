@@ -14,17 +14,27 @@
     outline: 1px solid blue;
 }
 
-::ng-deep .mat-mdc-tab-label-container {
-        background-color: hsl(var(--muted));
-    border-radius: 0.5rem;
-}
-
-
 ::ng-deep .mat-mdc-tab.mdc-tab--active {
     background-color: hsl(var(--background));
     border-radius: 0.5rem;
-    color: white;
 }
+
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: white !important;
+}
+
+::ng-deep .mat-mdc-tab-label-container {
+    background-color: hsl(var(--muted));
+    border-radius: 0.5rem;
+    border: none !important;
+}
+
+::ng-deep .mdc-tab__text-label {
+    color: hsl(var(--muted-foreground)) !important;
+}
+
+
+
 
 ::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab-indicator {
     display: none;
