@@ -1,0 +1,18 @@
+
+
+.bg-gradient-hero {
+    background-image: var(--gradient-hero);
+}
+
+.bg-gradient-primary {
+    background-image: var(--gradient-primary);
+}
+
+
+
+.hover\:shadow-glow:hover {
+    --tw-shadow: var(--shadow-glow);
+    --tw-shadow-colored: var(--shadow-glow);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
+}
+

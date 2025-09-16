@@ -1,0 +1,45 @@
+.bg-card\/50 {
+    background-color: hsl(var(--card) / .5);
+}
+
+.bg-background\/50 {
+    background-color: hsl(var(--background) / .5);
+}
+
+.bg-background\/30 {
+    background-color: hsl(var(--background) / .3);
+}
+
+.area-focus:focus-visible {
+    outline: 1px solid blue;
+}
+
+::ng-deep .mat-mdc-tab-label-container {
+        background-color: hsl(var(--muted));
+    border-radius: 0.5rem;
+}
+
+
+::ng-deep .mat-mdc-tab.mdc-tab--active {
+    background-color: hsl(var(--background));
+    border-radius: 0.5rem;
+    color: white;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab-indicator {
+    display: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary)); 
+  border-radius: 5px;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,0 +1,9 @@
+<div class="bg-background/30 flex text-white gap-3 p-3 rounded-lg mb-4">
+  <mat-icon [svgIcon]="getIconName()" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+  <div class="flex flex-col gap-1">
+    <div class=" text-[.8rem] text-white rounded-lg">
+      <span class="{{getBackgroundColor()}} p-1 rounded-lg">{{type}}</span>
+    </div>
+    <span>{{title}}</span>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="container mx-auto border  bg-card/50 p-6 rounded-lg shadow-elegant">
+  <div class="rounded-lg w-full ">
+    <div class="flex justify-center items-center h-full gap-6 md:flex-row flex-col">
+      <div class="p-6 border rounded-lg w-full min-h-[700px] bg-gradient-card">
+        <div class="flex flex-row gap-2 items-center">
+          <svg class="w-7 h-7 text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14" />
+          </svg>
+          <span class="text-white text-[1.5rem] font-bold">Code Editor</span>
+        </div>
+        @if (!textAreaContent) {
+        <div class="p-4 mb-2 mt-2 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+          role="alert">
+          Please enter your code in the editor below to analyze or format it.
+        </div>
+        }
+        <textarea [(ngModel)]="textAreaContent" name="" rows="20" cols="20"
+          class="border py-2 px-3 rounded-lg mt-4 resize-none bg-background/50 area-focus w-full text-white min-h-[400px]"
+          id=""></textarea>
+
+        <div class="flex items-center gap-3 mt-4">
+          <button [disabled]="disabledButton || !textAreaContent" (click)="analyzeCode()"
+            [class.disabled]="disabledButton || !textAreaContent"
+            class="rounded-md bg-blue-500 shadow-lg transition-all duration-300  hover:shadow-blue-500/50 text-white px-4 py-2 cursor-pointer">Analyze
+            Code</button>
+          <button [disabled]="disabledButton || !textAreaContent" (click)="formatCode()"
+            [class.disabled]="disabledButton || !textAreaContent"
+            class="rounded-md bg-black hover:bg-green-500 transition-all duration-300 text-white px-4 py-2 border cursor-pointer">Format
+            Code</button>
+        </div>
+      </div>
+
+      <div class="p-6 border rounded-lg w-full min-h-[700px] bg-gradient-card">
+        <div class="flex flex-row gap-2 items-center">
+          <svg class="w-7 h-7 text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
+              clip-rule="evenodd" />
+          </svg>
+
+          <span class="text-white text-[1.5rem] font-bold">Analysis Result</span>
+        </div>
+        <mat-tab-group class="mt-4">
+          <mat-tab label="Result">
+            <div class="flex flex-col overflow-y-auto max-h-[500px] mt-4">
+              @if (data) {
+              @for (result of data.result; track result.title) {
+              <app-result-card [title]="result.title" [type]="result.type"></app-result-card>
+              }
+              }
+
+              @if (!data) {
+              <div class="flex flex-col justify-center items-center h-full mt-8 text-gray-500">
+                <svg class="w-16 h-16 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14" />
+                </svg>
+                <span class="text-gray-400 text-[1rem]">No analysis results yet</span>
+              </div>
+              }
+            </div>
+          </mat-tab>
+          <mat-tab label="Statistics">
+            <div class="mt-4">
+              <div class="flex justify-between gap-2">
+                <div class="flex flex-col w-full justify-center items-center bg-background/30 p-6 rounded-lg">
+                  <span class="text-blue-500 text-[1.6rem] font-bold">{{data?.numberOfLines ?? 0}}</span>
+                  <span class="text-gray-400 text-[.9rem]">Lines</span>
+                </div>
+
+                <div class="flex flex-col w-full justify-center items-center bg-background/30 p-6 rounded-lg">
+                  <span class="text-green-500 text-[1.6rem] font-bold">{{data?.numberOfCharacters ?? 0}}</span>
+                  <span class="text-gray-400 text-[.9rem]">Characters</span>
+                </div>
+
+              </div>
+
+              <div class="flex justify-between gap-2 mt-7">
+                <div class="flex flex-col w-full justify-center items-center">
+                  <span class="text-red-500 text-[0.9rem] font-bold">{{data?.numberOfErrors ?? 0}}</span>
+                  <span class="text-gray-400 text-[.9rem]">Errors</span>
+                </div>
+
+                <div class="flex flex-col w-full justify-center items-center">
+                  <span class="text-yellow-500 text-[0.9rem] font-bold">{{data?.numberOfWarnings ?? 0}}</span>
+                  <span class="text-gray-400 text-[.9rem]">Warnings</span>
+                </div>
+
+                <div class="flex flex-col w-full justify-center items-center">
+                  <span class="text-green-500 text-[0.9rem] font-bold">{{data?.numberOfSuccesess ?? 0}}</span>
+                  <span class="text-gray-400 text-[.9rem]">Passed</span>
+                </div>
+
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+    </div>
+  </div>
+</div>
